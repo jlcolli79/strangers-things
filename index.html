@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stranger's Things</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap");
+    </style>
+    <script defer src="app.js" type="module"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <header>
+      <nav class="nav-bar">
+        <div class="page-title">Stranger's Things</div>
+        <input id="search-bar" type="text" placeholder="search"></input>
+        <a href="#" class="toggle-button">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </a>
+        <div class="nav-links">
+          <ul>
+            <li><a class="create-post-button" href="#">Create Post</a></li>
+            <li><a href="#">Messages</a></li>
+            <li><a href="#">Posts</a></li>
+            <li><a class="login-button" href="#">Login/Register</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div id="post-container"></div>
+
+    <!-- Registration Modal -->
+    <div class="registration-form-container">
+      <div class="registration-form">
+        <form action="">
+          <h3>Create Account</h3>
+          <input type="text" placeholder="Username" />
+          <input type="password" placeholder="password" />
+          <input type="password" placeholder="confirm password" />
+          <button class="registration-button create-account-button">
+            Create
+          </button>
+          <button class="registration-button registration-cancel-button">
+            Cancel
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="login-form-container">
+      <div class="login-form">
+        <form action="">
+          <h3>Log In</h3>
+          <input type="text" placeholder="Username" />
+          <input type="password" placeholder="password" />
+          <button class="login-button">Login</button>
+          <button class="login-button create-account-button">
+            Create Account
+          </button>
+          <button class="login-button login-cancel">Cancel</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Create Post Modal -->
+    <div class="create-post-form-container">
+      <div class="create-post-form">
+        <form action="" id="post-form">
+          <h3>Create Post</h3>
+          <input type="text" placeholder="Title" />
+          <input type="text" placeholder="Price" />
+          <input type="text" placeholder="Description" />
+          <input type="text" placeholder="Location" />
+          <label for="Delivery">Delivery Avilable?</label>
+          <select name="Delivery" id="delivery" form="post-form">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+          <br />
+          <br />
+          <button class="create-post-button">Submit</button>
+          <button class="cancel-post-button">Cancel</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
