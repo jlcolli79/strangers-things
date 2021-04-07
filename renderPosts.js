@@ -12,18 +12,26 @@ export async function getPosts() {
 }
 
 export function renderPosts(post) {
-  const { title, price, description, location, willDeliver } = post;
+  let { title, price, description, location, willDeliver } = post;
+  if (location === "[On Request]" || location === "") {
+    location = "Location available on request.";
+  }
   return $(`
     <div class="item">
       <header class="item-header">
         <h3 class="item-title">${title}</h3>
         </header>
-      <p class="item-price"><strong>Price:</strong>${price}</p>
-      <p class="item-description"><strong>Description:</strong> ${description}</p>
+      <p class="item-author"><strong>Author: </strong>${
+        post.author.username
+      }</p>
+      <p class="item-price"><strong>Price: </strong>${price}</p>
+      <p class="item-description"><strong>Description: </strong> ${description}</p>
       <p class="item-location"><strong>Location</strong>: ${location}</p>
-      <p class="item-delivery"><strong>Delivery available</strong>: ${willDeliver}</p>
+      <p class="item-delivery"><strong>Delivery available</strong>: ${
+        willDeliver ? "Yes" : "No"
+      }</p>
       <footer class = item-footer>
-        <div>Edit Button</div>     <div>Delete Button</div>
+    
       </footer>
     </div>
   `).data("post", post);
@@ -36,4 +44,28 @@ export function renderPostsList(postList) {
   postList.forEach((post) => {
     postElement.append(renderPosts(post));
   });
+}
+
+export async function sendNewPost(postObj) {
+  try {
+    const url = `${BASE_URL}${POST_ENDPOINT}`;
+    const token = localStorage.getItem("token");
+    console.log(token);
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(postObj),
+    });
+    const newPost = await response.json();
+    if (!newPost.success) alert(newPost.error.message);
+    if (newPost.success) {
+      console.log(newPost);
+    }
+    return newPost;
+  } catch (error) {
+    throw error;
+  }
 }

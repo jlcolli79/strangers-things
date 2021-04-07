@@ -25,9 +25,10 @@
         <div class="nav-links">
           <ul>
             <li><a class="create-post-button" href="#">Create Post</a></li>
-            <li><a href="#">Messages</a></li>
-            <li><a href="#">Posts</a></li>
-            <li><a class="login-button" href="#">Login/Register</a></li>
+            <li><a id="message-button"href="#">Messages</a></li>
+            <li><a id="my-posts-button" href="#">My Posts</a></li>
+            <li><a id="nav-login" class="login-button" href="#">Login/Register</a></li>
+            <li><a id="nav-logout" class="login-button" href="#">Logout</a></li>
           </ul>
         </div>
       </nav>
@@ -37,17 +38,20 @@
     <!-- Registration Modal -->
     <div class="registration-form-container">
       <div class="registration-form">
-        <form action="">
+        <form name = "registration-form" class = "register-form" id = "register-form action="" >
           <h3>Create Account</h3>
-          <input type="text" placeholder="Username" />
-          <input type="password" placeholder="password" />
-          <input type="password" placeholder="confirm password" />
-          <button class="registration-button create-account-button">
+          <input type="text" placeholder="Username" id="create-username" required/>    
+          <input type="password" placeholder="password" id="create-password" required/>
+          <input type="password" placeholder="confirm password" id="confirm-password" required />
+          <button disabled class="registration-button create-button">
             Create
           </button>
-          <button class="registration-button registration-cancel-button">
+          <button type = "button" class="registration-button registration-cancel-button">
             Cancel
           </button>
+          <footer class="password-warning-message">
+            <h5>Password fields do not match.</h5>
+          </footer>
         </form>
       </div>
     </div>
@@ -55,15 +59,15 @@
     <!-- Login Modal -->
     <div class="login-form-container">
       <div class="login-form">
-        <form action="">
+        <form id=login-form name ="login-form" action="" >
           <h3>Log In</h3>
-          <input type="text" placeholder="Username" />
-          <input type="password" placeholder="password" />
-          <button class="login-button">Login</button>
-          <button class="login-button create-account-button">
+          <input id="login-user-name" type="text" placeholder="Username" required />
+          <input id="login-password" type="password" placeholder="password" required/>
+          <button  class="login-button login-submit-button" disabled>Login</button>
+          <button type = "button" class="login-button create-account-button">
             Create Account
           </button>
-          <button class="login-button login-cancel">Cancel</button>
+          <button type = "button" class="login-button login-cancel">Cancel</button>
         </form>
       </div>
     </div>
@@ -71,12 +75,12 @@
     <!-- Create Post Modal -->
     <div class="create-post-form-container">
       <div class="create-post-form">
-        <form action="" id="post-form">
+        <form name ="create-post-form" action="" id="post-form" >
           <h3>Create Post</h3>
-          <input type="text" placeholder="Title" />
-          <input type="text" placeholder="Price" />
-          <input type="text" placeholder="Description" />
-          <input type="text" placeholder="Location" />
+          <input id="create-title"type="text" placeholder="Title" />
+          <input id="create-price"type="text" placeholder="Price" />
+          <input id="create-description"type="text" placeholder="Description" />
+          <input id="create-location"type="text" placeholder="Location" />
           <label for="Delivery">Delivery Avilable?</label>
           <select name="Delivery" id="delivery" form="post-form">
             <option value="Yes">Yes</option>
@@ -84,8 +88,8 @@
           </select>
           <br />
           <br />
-          <button class="create-post-button">Submit</button>
-          <button class="cancel-post-button">Cancel</button>
+          <button  class="create-post-btn" >Submit</button>
+          <button type = "button" class="cancel-post-button">Cancel</button>
         </form>
       </div>
     </div>
