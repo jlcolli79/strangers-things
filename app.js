@@ -1,4 +1,10 @@
-import { getPosts, renderPostsList, sendNewPost } from "./renderPosts.js";
+import {
+  getPosts,
+  renderPosts,
+  renderPostsList,
+  sendNewPost,
+  deletePost,
+} from "./renderPosts.js";
 
 import {
   openLoginForm,
@@ -102,7 +108,7 @@ $("#login-form").on("submit", async (event) => {
   await loginUser(loginObj);
   loginForm.css("display", "none");
   $("body").css("overflow", "");
-  updateUI();
+  bootstrap();
 });
 
 //user logout
@@ -111,7 +117,7 @@ $("#nav-logout").on("click", function () {
   alert("You have successfully logged out!");
   $("#login-form").trigger("reset");
   state.token = [];
-  updateUI();
+  bootstrap();
 });
 
 //create post
@@ -136,7 +142,21 @@ $("#post-form").on("submit", async (event) => {
   createPostForm.css("display", "none");
   $("body").css("overflow", "");
   bootstrap();
-  updateUI();
+});
+
+//Delete Post
+$("#post-container").on("click", ".delete-post-button", async function (event) {
+  console.log(event);
+  const postElement = $(this).closest(".item");
+  const post = postElement.data("post");
+
+  try {
+    const result = await deletePost(post._id);
+    state.posts = state.posts.filter((_post) => _post._id !== post._id);
+    bootstrap();
+  } catch (error) {
+    throw error;
+  }
 });
 
 async function bootstrap() {

@@ -1,8 +1,19 @@
 import { BASE_URL, POST_ENDPOINT } from "./app.js";
 
 export async function getPosts() {
+  const token = localStorage.getItem("token");
+  console.log(token);
   try {
-    const response = await fetch(`${BASE_URL}${POST_ENDPOINT}`);
+    const response = await fetch(
+      "https://strangers-things.herokuapp.com/api/2101-VPI-RM-WEB-PT/posts",
+      token
+        ? {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        : {}
+    );
     const data = await response.json();
     console.log(data);
     return data.data.posts;
@@ -12,7 +23,7 @@ export async function getPosts() {
 }
 
 export function renderPosts(post) {
-  let { title, price, description, location, willDeliver } = post;
+  let { title, price, description, location, willDeliver, isAuthor } = post;
   if (location === "[On Request]" || location === "") {
     location = "Location available on request.";
   }
@@ -31,7 +42,13 @@ export function renderPosts(post) {
         willDeliver ? "Yes" : "No"
       }</p>
       <footer class = item-footer>
-    
+      ${
+        localStorage.getItem("token")
+          ? isAuthor
+            ? '<button class="edit-post-button">EDIT</button><button class="delete-post-button">DELETE</button>'
+            : '<button class="message-button">MESSAGE</button>'
+          : ""
+      }
       </footer>
     </div>
   `).data("post", post);
@@ -42,7 +59,7 @@ export function renderPostsList(postList) {
   postElement.empty();
 
   postList.forEach((post) => {
-    postElement.append(renderPosts(post));
+    postElement.prepend(renderPosts(post));
   });
 }
 
@@ -65,6 +82,25 @@ export async function sendNewPost(postObj) {
       console.log(newPost);
     }
     return newPost;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function deletePost(postId) {
+  try {
+    const response = await fetch(
+      `https://strangers-things.herokuapp.com/api/2101-VPI-RM-WEB-PT/posts/${postId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    const parsedResponse = await response.json();
+    return parsedResponse;
   } catch (error) {
     throw error;
   }

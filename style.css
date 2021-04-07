@@ -110,7 +110,7 @@ body {
   padding: 0 5px 0 5px;
   border: black solid 2px;
   margin: 5px;
-  height: 300px;
+  height: 350px;
   width: 300px;
 }
 
@@ -133,7 +133,8 @@ body {
 .item-footer {
   display: flex;
   flex-direction: row;
-  margin: 10px;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .registration-form-container {
@@ -304,6 +305,31 @@ body {
 
 #delivery {
   width: 100px;
+}
+
+.message-button {
+  background: white;
+  outline: none;
+}
+
+.message-button:hover {
+  background: #999;
+}
+
+.edit-post-button {
+  background: white;
+}
+
+.edit-post-button:hover {
+  background: #999;
+}
+
+.delete-post-button {
+  background: white;
+}
+
+.delete-post-button:hover {
+  background: #999;
 }
 
 @media (max-width: 760px) {
